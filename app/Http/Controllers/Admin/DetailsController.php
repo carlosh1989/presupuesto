@@ -42,19 +42,23 @@ class DetailsController extends Controller
         $decreto = Decree::find($request->decree_id);
         $montoSuma = $decreto->details->sum('monto');
         $montoTotal = $decreto->montoTotal;
-        $montoPartida = $request->monto;
+   
+        $montoPartida = str_replace('.', '', $request->monto); 
+        $montoPartida = str_replace(',', '.', $montoPartida); 
+     
         $montoProvicional = $montoSuma + $montoPartida;
-
-
         if($montoProvicional > $montoTotal):
             Alert::warning('La partida pasa el monto del decreto.', 'upps!');
             return Redirect::to('decrees/'.$request->decree_id);
         else:
             $partida = Detail::create([
                 'decree_id' => $request->decree_id,
-                'partida'   => $request->partida,
-                'monto'     => $request->monto,
+                'departure_id' => '1',
+                'dependence_id' => '1',
+                'codigoPresupuestario' => $request->partida,    
+                'monto'     => $montoPartida,
                 'traslado'  => $request->traslado,
+                'estado'   => '1'
             ]);
 
             $decretoID = $request->decree_id;

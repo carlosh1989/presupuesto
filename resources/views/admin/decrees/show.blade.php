@@ -26,7 +26,7 @@
                 <label for="partidaMas">Partida</label>
               </div>
               <div class="col s4 push-s1 input-field">
-                <input type="number" id="montoMas" name="monto" required="required" class="validate"/>
+                <input type="text" id="montoMas" name="monto" required="required" class="validate"/>
                 <label for="montoMas">Monto</label>
               </div>
               <div class="col s2 push-s1">
@@ -45,7 +45,7 @@
                 <label for="partidaMenos">Partida</label>
               </div>
               <div class="col s4 push-s1 input-field">
-                <input type="number" id="montoMenos" name="monto" required="required" class="validate"/>
+                <input type="text" id="montoMenos" name="monto" required="required" class="validate"/>
                 <label for="montoMenos">Monto</label>
               </div>
               <div class="col s2 push-s1">
@@ -62,7 +62,9 @@
           <div><a class="blue-text">Monto sumatorio:   <a class="grey-text">{{$decreto->details->sum('monto')}}</a></a></div>
         </div>
         <div class="col s3">
-          <div><a class="blue-text">Monto Total:   <a class="grey-text">{{$decreto->montoTotal}}</a></a></div>
+          <div><a class="blue-text">
+              Monto Total: 
+              @var('montoTotal',(double)$decreto->montoTotal)  <a class="grey-text">{{$montoTotal}}</a></a></div>
         </div>
       </div>
       <div class="divider"></div>
@@ -79,8 +81,8 @@
         </thead>
         <tbody>@forelse($decreto->details as $partida)
           <tr>
-            <td>{{$partida->partida}}</td>
-            <td>{{$partida->monto}}</td>@if($partida->traslado == true)
+            <td>{{$partida->partida}}</td>@var('monto',(double)$partida->monto)
+            <td>{{$monto}}</td>@if($partida->traslado == true)
             <td>
               <label>recibe</label>
             </td>@else
@@ -116,7 +118,7 @@
       </div>
       <div class="row">
         <div class="col s6">
-          <div><a class="blue-text">Monto Total  <a class="grey-text">{{$decreto->montoTotal}}</a></a></div>
+          <div><a class="blue-text">Monto Total <a class="grey-text">{{$decreto->montoTotal}}</a></a></div>
         </div>
         <div class="col s6">
           <div><a class="blue-text">
@@ -127,4 +129,12 @@
     </div>
     <div class="modal-footer"><a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a></div>
   </div>
-</div>@endsection
+</div>
+<script>
+  $(document).ready(function(){
+  $('#partidaMas').mask('00-00-00-00-00,0.00-00-00-00');
+  $('#montoMas').mask('#.##0,00', {reverse: true});
+  $('#partidaMenos').mask('00-00-00-00-00,0.00-00-00-00');
+  $('#montoMenos').mask('#.##0,00', {reverse: true});
+  }); 
+</script>@endsection

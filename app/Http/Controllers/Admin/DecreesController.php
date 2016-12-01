@@ -43,37 +43,20 @@ class DecreesController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input());
-        list($dependencia, $idDependencia, $codigoDependencia) = explode(':',$request->dependencia);
-        list($partida, $idPartida, $codigoPartida) = explode(':',$request->partida);
-        $codigoPresupuestario = $codigoDependencia.'-'.$codigoPartida;
-
-        $fecha = $request->fecha;   
-        $numeroDecreto = $request->numeroDecreto;
-        $descripcion = $request->descripcion;
-        $monto = $request->monto;
-        $numero = $request->numeroDecreto;
-        $observaciones = '';
-        $montoTotal = $request->montoTotal;
-        $estado = 1;
-
+        $montoTotal = str_replace('.', '', $request->montoTotal); 
+        $montoTotal = str_replace(',', '.', $montoTotal); 
         $decreto = Decree::create([
-            'departure_id' => $idPartida,
-            'dependence_id' => $idDependencia,
-            'numero' => $numero,
-            'fecha' => $fecha,
-            'codigoPresupuestario' => $codigoPresupuestario,
+            'numero' => $request->numeroDecreto,
+            'fecha' => $request->fecha,
             'tipoMovimiento' => 'Traslado de partida',
-            'descripcion' => $descripcion,
+            'descripcion' => $request->descripcion,
             'observaciones' => '',
             'montoTotal' => $montoTotal,
-            'estado' => $estado,
+            'estado' => 1,
         ]);
 
-        $decretoID = $decreto->id;
-
         Alert::success('Decreto ingresado exitosamente.', 'Exito!');
-        return Redirect::to('decrees/'.$decretoID);
+        return Redirect::to('decrees/'.$decreto->id);
     }
 
     /**

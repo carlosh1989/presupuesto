@@ -25,7 +25,7 @@ class CreateTableDecrees extends Migration
             $table->text('descripcion');
             // en casod e que se anule un decreto
             $table->text('observaciones');
-            $table->decimal('montoTotal', 30, 2);
+            $table->double('montoTotal', 20, 3);
             //ACTIVO = 1 ,  ANULADO = 0
             $table->boolean('estado');
             $table->timestamps();

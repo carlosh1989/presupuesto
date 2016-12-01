@@ -18,24 +18,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" id="Dependencia" name="dependencia" class="autocomplete validate"/>
-              <label for="Dependencia">Dependencia</label>
-            </div>
-            <div class="input-field col s6 validate">
-              <input type="text" id="Partida" name="partida" class="autocomplete validate"/>
-              <label for="Partida">Partida</label>
-            </div>
-          </div>
-        </div>
         <div class="input-field col s12">
           <textarea id="textareaDescripcion" name="descripcion" cols="30" rows="10" length="120" class="materialize-textarea validate"></textarea>
           <label for="textareaDescripcion">Descripción</label>
         </div>
         <div class="input-field col l6">
-          <input id="monto" name="montoTotal" type="number" class="validate"/>
+          <input id="monto" name="montoTotal" type="text" class="validate"/>
           <label for="monto">Monto</label>
         </div>
       </div>
@@ -70,5 +58,10 @@
   
   });
   }); 
-  })(jQuery); 
+  })(jQuery);
+  
+  $(document).ready(function(){
+  $('#numeroDecreto').mask('000/00');
+  $('#monto').mask('#.##0,00', {reverse: true});
+  }); 
 </script>@endsection

@@ -20,22 +20,12 @@
 					label(for="fecha") Fecha
 
 			.row
-				.col.s12
-					.row
-						.input-field.col.s6
-							input(type="text" id="Dependencia" name="dependencia" class="autocomplete").validate
-							label(for="Dependencia") Dependencia
-
-						.input-field.col.s6.validate
-							input(type="text" id="Partida" name="partida" class="autocomplete").validate
-							label(for="Partida") Partida
-
 				.input-field.col.s12
 					textarea#textareaDescripcion(name="descripcion", cols="30", rows="10" length="120").materialize-textarea.validate
 					label(for="textareaDescripcion") Descripción
 
 				.input-field.col.l6
-					input(id="monto" name="montoTotal" type="number").validate
+					input(id="monto" name="montoTotal" type="text").validate
 					label(for="monto") Monto
 
 			.row
@@ -66,7 +56,12 @@ script.
 
 	});
 	}); 
-	})(jQuery); 
+	})(jQuery);
+
+	$(document).ready(function(){
+	$('#numeroDecreto').mask('000/00');
+	$('#monto').mask('#.##0,00', {reverse: true});
+	}); 
 @endsection
 
 

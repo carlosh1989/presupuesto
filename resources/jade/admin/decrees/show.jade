@@ -27,7 +27,7 @@
 								input(type="text" id="partidaMas" name="partida" required).validate
 								label(for="partidaMas") Partida
 							.col.s4.push-s1.input-field
-								input(type="number" id="montoMas" name="monto" required).validate
+								input(type="text" id="montoMas" name="monto" required).validate
 								label(for="montoMas") Monto
 							.col.s2.push-s1
 								button.btn.green(type="submit")  
@@ -43,7 +43,7 @@
 								input(type="text" id="partidaMenos" name="partida" required).validate
 								label(for="partidaMenos") Partida
 							.col.s4.push-s1.input-field
-								input(type="number" id="montoMenos" name="monto" required).validate
+								input(type="text" id="montoMenos" name="monto" required).validate
 								label(for="montoMenos") Monto
 							.col.s2.push-s1
 								button.btn.red(type="submit") 
@@ -55,8 +55,9 @@
 					div: a.blue-text Monto sumatorio:   
 						a.grey-text {{$decreto->details->sum('monto')}}
 				.col.s3
-					div: a.blue-text Monto Total:   
-						a.grey-text {{$decreto->montoTotal}}
+					div: a.blue-text Monto Total: 
+						@var('montoTotal',(double)$decreto->montoTotal)  
+						a.grey-text {{$montoTotal}}
 
 
 			.divider
@@ -73,7 +74,8 @@
 					@forelse($decreto->details as $partida)
 					tr
 						td {{$partida->partida}}
-						td {{$partida->monto}}
+						@var('monto',(double)$partida->monto)
+						td {{$monto}}
 						@if($partida->traslado == true)
 						td
 							label recibe
@@ -112,7 +114,8 @@
 						a.grey-text {{$decreto->fecha}}
 			.row
 				.col.s6
-					div: a.blue-text Monto Total  
+					div: a.blue-text Monto Total 
+
 						a.grey-text {{$decreto->montoTotal}}
 				.col.s6
 					div: a.blue-text Estado  
@@ -127,5 +130,11 @@
 		div.modal-footer
 			a(href="#!").modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
   
-
+script.
+	$(document).ready(function(){
+	$('#partidaMas').mask('00-00-00-00-00,0.00-00-00-00');
+	$('#montoMas').mask('#.##0,00', {reverse: true});
+	$('#partidaMenos').mask('00-00-00-00-00,0.00-00-00-00');
+	$('#montoMenos').mask('#.##0,00', {reverse: true});
+	}); 
 @endsection

@@ -19,7 +19,7 @@ class CreateTableDetails extends Migration
             $table->integer('departure_id')->unsigned();
             $table->integer('dependence_id')->unsigned();
             $table->string('codigoPresupuestario');
-            $table->decimal('monto', 30, 2);
+            $table->double('monto', 20, 3);
             //OTORGA = 0 , RECIbE = 1
             $table->boolean('traslado');
             $table->boolean('estado');

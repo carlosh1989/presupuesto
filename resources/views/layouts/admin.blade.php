@@ -90,7 +90,9 @@
     </div>
   </nav>
 
+
     <script src="{{asset('bower/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('bower/jquery-mask-plugin/dist/jquery.mask.min.js')}}"></script>
     <script src="{{asset('bower/sweetalert/dist/sweetalert.min.js')}}"></script>
     <script src="{{asset('bower/materialize/dist/js/materialize.min.js')}}"></script>
     <script src="{{asset('bower/pickadate/lib/compressed/picker.date.js')}}"></script>
@@ -157,6 +159,8 @@ $(document).ready(function(){
         $("#busqueda").toggle();
     });
 });
+
+
 </script>
 
     </div>
