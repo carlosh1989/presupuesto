@@ -16,12 +16,10 @@ class CreateTableDecrees extends Migration
         Schema::create('decrees', function (Blueprint $table) {
             $table->increments('id');
             // id de la partida
-            $table->integer('departure_id')->unsigned();
-            $table->integer('dependence_id')->unsigned();
+
             // numero del decreto
             $table->string('numero');
             $table->string('fecha');
-            $table->string('codigoPresupuestario');
             //si es traspaso o credito
             $table->string('tipoMovimiento');
             $table->text('descripcion');

@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Departure;
-use App\Dependency;
-use App\Detail;
 use Illuminate\Database\Eloquent\Model;
 
 class Decree extends Model  {
@@ -23,7 +20,7 @@ class Decree extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['departure_id', 'dependence_id', 'numero', 'fecha', 'codigoPresupuestario', 'tipoMovimiento', 'descripcion', 'observaciones', 'montoTotal', 'estado'];
+    protected $fillable = ['numero', 'fecha', 'tipoMovimiento', 'descripcion', 'observaciones', 'montoTotal', 'estado'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -45,7 +42,6 @@ class Decree extends Model  {
      * @var array
      */
     protected $dates = [];
-
 
     public function dependency()
     {

@@ -1,4 +1,4 @@
-const elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir');
 var notify = require("gulp-notify");
 //require('laravel-elixir-vue-2');
 require('laravel-elixir-jade');

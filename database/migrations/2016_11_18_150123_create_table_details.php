@@ -16,10 +16,13 @@ class CreateTableDetails extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('decree_id')->unsigned();
-            $table->string('partida');
+            $table->integer('departure_id')->unsigned();
+            $table->integer('dependence_id')->unsigned();
+            $table->string('codigoPresupuestario');
             $table->decimal('monto', 30, 2);
             //OTORGA = 0 , RECIbE = 1
             $table->boolean('traslado');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }

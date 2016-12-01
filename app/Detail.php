@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Decree;
 use Illuminate\Database\Eloquent\Model;
 
 class Detail extends Model  {
@@ -21,7 +20,7 @@ class Detail extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['decree_id', 'partida', 'monto', 'traslado'];
+    protected $fillable = ['decree_id', 'departure_id', 'dependence_id', 'codigoPresupuestario', 'monto', 'traslado', 'estado'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -35,7 +34,7 @@ class Detail extends Model  {
      *
      * @var array
      */
-    protected $casts = ['traslado' => 'boolean'];
+    protected $casts = ['traslado' => 'boolean', 'estado' => 'boolean'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -43,7 +42,6 @@ class Detail extends Model  {
      * @var array
      */
     protected $dates = [];
-
 
     public function decree()
     {
