@@ -1,0 +1,74 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	br
+	.card-panel
+		h5.blue-text Nuevo Decreto (Traspaso de Partida)
+		.divider
+		br
+		form.col.s12(action="{{url('decrees')}}" method="POST" autocomplete="off")
+			{{csrf_field()}}
+			input(type="hidden" name="tipoMovimiento" value="Traspaso de Partida")
+			.row
+				.input-field.col.l6
+					input(id="numeroDecreto" type="text" name="numeroDecreto").validate
+					label(for="numeroDecreto") Numero de Decreto
+
+				.input-field.col.l6
+					input(id="fecha" type="text" name="fecha").datepicker
+					label(for="fecha") Fecha
+
+			.row
+				.col.s12
+					.row
+						.input-field.col.s6
+							input(type="text" id="Dependencia" name="dependencia" class="autocomplete").validate
+							label(for="Dependencia") Dependencia
+
+						.input-field.col.s6.validate
+							input(type="text" id="Partida" name="partida" class="autocomplete").validate
+							label(for="Partida") Partida
+
+				.input-field.col.s12
+					textarea#textareaDescripcion(name="descripcion", cols="30", rows="10" length="120").materialize-textarea.validate
+					label(for="textareaDescripcion") Descripción
+
+				.input-field.col.l6
+					input(id="monto" name="montoTotal" type="number").validate
+					label(for="monto") Monto
+
+			.row
+				.col.s12
+					button(type="submit").blue.btn.waves-effect.waves-light.pull-right Ingresar 
+						i.fa.fa-save.fa-2x
+
+script.
+	(function($){
+	$(function(){
+	$(function() {
+
+	$('#Dependencia').autocomplete({
+	data: {
+	@foreach($dependencias as $d)
+	"{{$d->descripcion}}:{{$d->id}}:{{$d->codigo}}": null,
+	@endforeach
+	}
+	});
+
+	$('#Partida').autocomplete({
+	data: {
+	@foreach($partidas as $d)
+	" {{$d->descripcion}}:{{$d->id}}:{{$d->codigo}}": null,
+	@endforeach
+	}
+	});
+
+	});
+	}); 
+	})(jQuery); 
+@endsection
+
+
+
+

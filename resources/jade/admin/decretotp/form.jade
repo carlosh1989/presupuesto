@@ -1,0 +1,41 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	.card-panel
+		h4.blue-text Ingresar Decreto
+		.divider
+		form(action="{{url('decretos')}}" method="post")
+			{{csrf_field()}}
+			.row
+				.col.s12
+					.row
+						.input-field.col.s12
+							input(type="text" id="titulo1" name="titulo" value="{{old('titulo')}}").validate
+							label(for="titulo1") Titulo
+                            
+					@if ($errors->has('titulo'))
+					.card-panel.red.white-text.animated.bounceIn
+						{{ $errors->first('titulo') }}
+						i.fa.fa-exclamation.pull-right.fa-2x(aria-hidden="true")
+					@endif
+			
+				.col.s12
+					.row
+						.input-field.col.s12
+							textarea#textarea1(name="descripcion").materialize-textarea.validate {{old('descripcion')}}
+							label(for="textarea1") Descripción
+
+					@if ($errors->has('descripcion'))
+					.card-panel.red.white-text.animated.bounceIn
+						{{ $errors->first('descripcion') }}
+						i.fa.fa-exclamation.pull-right.fa-2x(aria-hidden="true")
+					@endif
+				.pull-right 
+					.col.s12
+						.row
+							button(type="submit").btn.btn.waves-effect.waves-light Ingresar 
+								i.material-icons.right send
+
+@endsection 
+

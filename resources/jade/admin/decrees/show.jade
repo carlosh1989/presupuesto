@@ -1,0 +1,131 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	br
+	.card-panel
+		h5.blue-text: a.waves-effect.waves-blue.btn-flat.blue-text(href="#modal1") Decreto N° {{$decreto->numero}}
+		div
+			.divider
+			.row
+				.col.s12
+					ul.tabs
+						li.tab.col.s3
+							a(href="#test1").green-text Aumentos 
+						li.tab.col.s3
+							a(href="#test2").red-text Disminuciones
+					.divider
+				.col.s12#test1 
+					form(action="{{url('details')}}" method="POST")
+						{{csrf_field()}}
+						@var('decretoID',$decreto->id)
+						br
+						.row
+							.col.s5.push-s1.input-field
+								input(type="hidden" name="decree_id" value="{{$decretoID}}")
+								input(type="hidden" name="traslado" value="1")
+								input(type="text" id="partidaMas" name="partida" required).validate
+								label(for="partidaMas") Partida
+							.col.s4.push-s1.input-field
+								input(type="number" id="montoMas" name="monto" required).validate
+								label(for="montoMas") Monto
+							.col.s2.push-s1
+								button.btn.green(type="submit")  
+									i(aria-hidden="true").fa.fa-plus
+				.col.s12#test2
+					form(action="{{url('details')}}" method="POST")
+						{{csrf_field()}}
+						br
+						.row
+							.col.s5.push-s1.input-field
+								input(type="hidden" name="decree_id" value="{{$decretoID}}")
+								input(type="hidden" name="traslado" value="0")
+								input(type="text" id="partidaMenos" name="partida" required).validate
+								label(for="partidaMenos") Partida
+							.col.s4.push-s1.input-field
+								input(type="number" id="montoMenos" name="monto" required).validate
+								label(for="montoMenos") Monto
+							.col.s2.push-s1
+								button.btn.red(type="submit") 
+									i(aria-hidden="true").fa.fa-minus
+				.divider
+			.row
+				.col.s6
+				.col.s3
+					div: a.blue-text Monto sumatorio:   
+						a.grey-text {{$decreto->details->sum('monto')}}
+				.col.s3
+					div: a.blue-text Monto Total:   
+						a.grey-text {{$decreto->montoTotal}}
+
+
+			.divider
+			.row
+				.col.s12
+			@if($decreto->details)
+			table.centered.striped
+				thead
+					tr.grey-text
+						th Partida
+						th Monto
+						th Traslado
+				tbody
+					@forelse($decreto->details as $partida)
+					tr
+						td {{$partida->partida}}
+						td {{$partida->monto}}
+						@if($partida->traslado == true)
+						td
+							label recibe
+						@else
+						td
+							label otorga
+						@endif		
+					@empty
+
+					@endforelse
+
+			@else
+			div.grey-text No hay partidas aun para este decreto.
+			@endif
+
+
+	div(id="modal1").modal.botton-sheet
+		div.modal-content
+			p.
+				{{$decreto->descripcion}}
+			.divider
+			br
+			.row
+				.col.s6
+					div: a.blue-text N°   
+						a.grey-text {{$decreto->numero}}
+				.col.s6
+					div: a.blue-text Tipo movimiento  
+						a.grey-text {{$decreto->tipoMovimiento}}
+			.row
+				.col.s6
+					div: a.blue-text Codigo Presupuestario  
+						a.grey-text {{$decreto->codigoPresupuestario}}
+				.col.s6
+					div: a.blue-text Fecha  
+						a.grey-text {{$decreto->fecha}}
+			.row
+				.col.s6
+					div: a.blue-text Monto Total  
+						a.grey-text {{$decreto->montoTotal}}
+				.col.s6
+					div: a.blue-text Estado  
+						@if($decreto->estado == true)
+						a.grey-text Activo
+						@else
+						a.grey-text Anulado
+						@endif
+
+
+
+		div.modal-footer
+			a(href="#!").modal-action.modal-close.waves-effect.waves-green.btn-flat Cerrar
+  
+
+@endsection

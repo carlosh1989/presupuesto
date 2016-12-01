@@ -1,0 +1,24 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	br
+	.card-panel
+		h5.blue-text Decretos
+		.divider
+		table
+			thead
+				tr
+					th Descripción
+					th n° Decreto
+					th Tipo Movimiento
+			tbody
+				@forelse($decretos as $decreto)
+				tr
+					td {{$decreto->descripcion}}
+					td {{$decreto->numero}}
+					td {{$decreto->tipoMovimiento}}
+				@empty
+				label.grey-text No hay Decretos.
+				@endforelse
+@endsection

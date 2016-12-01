@@ -1,0 +1,43 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	.card-panel
+		h4.blue-text Actualizar Decreto
+		.divider
+		@var('id',$decreto->id)
+		form(action="{{url('decretos/'.$id)}}" method="POST" accept-charset="UTF-8")
+			{{csrf_field()}}
+			input(type="hidden" name="_method" value="PUT" )
+			.row
+				.col.s12
+					.row
+						.input-field.col.s12
+							@var('titulo',$decreto->titulo)
+							input(type="text" id="titulo1" name="titulo" value="{{ old( 'titulo', $titulo) }}").validate
+							label(for="titulo1") Titulo
+                            
+					@if ($errors->has('titulo'))
+					.card-panel.red.white-text.animated.bounceIn
+						{{ $errors->first('titulo') }}
+						i.fa.fa-exclamation.pull-right.fa-2x(aria-hidden="true")
+					@endif
+			
+				.col.s12
+					.row
+						.input-field.col.s12
+							@var('descripcion',$decreto->descripcion)
+							textarea#textarea1(name="descripcion").materialize-textarea.validate {{ old( 'descripcion', $descripcion) }}
+							label(for="textarea1") Descripción
+
+					@if ($errors->has('descripcion'))
+					.card-panel.red.white-text.animated.bounceIn
+						{{ $errors->first('descripcion') }}
+						i.fa.fa-exclamation.pull-right.fa-2x(aria-hidden="true")
+					@endif
+				.pull-right 
+					.col.s12
+						.row
+							button(type="submit").btn.btn.waves-effect.waves-light Actualizar 
+								i.material-icons.right send
+@endsection

@@ -1,0 +1,10 @@
+TRASLADO DE PARTIDA 
+
+1. en el ingreso de decreto
+
+titulo
+descripcion
+
+2. Reglones de aumnetos y disminuciones
+
+- estaran en la misma pantalla pero con un select para identificar si es un aumento o disminucion

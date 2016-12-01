@@ -1,0 +1,31 @@
+@extends('layouts.admin')
+
+@section('content')
+.container
+	br
+	.card-panel
+		h5.blue-text Partida {{$partida->partida}}
+		.divider
+		br
+		form.col.s12(action="{{url('decrees')}}" method="POST" autocomplete="off")
+			{{csrf_field()}}
+			@var('decretoID',$partida->decree_id)
+			br
+			.row
+				.col.s5.push-s1.input-field
+					input(type="hidden" name="decree_id" value="{{$decretoID}}")
+					input(type="hidden" name="traslado" value="0")
+					input(type="text" id="partidaMenos" name="partida" required).validate
+					label(for="partidaMenos") Partida
+				.col.s4.push-s1.input-field
+					input(type="number" id="montoMenos" name="monto" required).validate
+					label(for="montoMenos") Monto
+				.col.s2.push-s1
+					@if($partida->traslado = true)
+					button.btn.green(type="submit") 
+						i(aria-hidden="true").fa.fa-plus
+					@else
+					button.btn.red(type="submit") 
+						i(aria-hidden="true").fa.fa-minus
+						@endif
+@endsection

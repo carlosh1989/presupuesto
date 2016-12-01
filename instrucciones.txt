@@ -1,0 +1,32 @@
+
+partida_id*
+ingresa autocomplete ----
+						|
+						codigoPresupuestario
+						partida_codigo + dependencia_codigo
+                        |
+dependencia_id*----------
+ingresan autocomplete
+
+numero* 
+ingresan 
+
+fecha*
+ingresan 
+
+descripcion*
+ingresan textarea
+
+--- automaticos ---
+
+codigoPresupuestario
+partida_codigo + dependencia_codigo
+
+tipoMovimiento
+automatico insertado segun de que formulario se envie
+
+observaciones 
+ingresan si se anula decreto
+
+estado 
+automatico al crear el decreto y se ingresa 1 al ser boolean

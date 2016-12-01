@@ -1,0 +1,26 @@
+	@extends('layouts.admin')
+
+@section('content')
+.container
+	.card-panel
+		h3.blue-text Decretos
+		.pull-right 
+			a(href="{{url('decretos/create')}}").btn.ble
+				i.fa.fa-plus.pull-right.fa-2x(aria-hidden="true")
+
+		table
+			thead
+				tr
+					th(data-field="Titulo") Titulo
+					th(data-field="Desc") Descripciónsdfsdfsd
+			tbody
+				@foreach($decretos as $decreto)
+				tr
+					td {{$decreto->titulo}}
+					@var('idDecreto',$decreto->id)
+					@var('descripcion',$decreto->descripcion)
+					td {{$descripcion}}
+					td: a.btn.waves-effect.waves-light.blue(href="{{url('decretos/'.$idDecreto)}}")
+						i.fa.fa-search-plus(aria-hidden="true")
+				@endforeach
+@endsection

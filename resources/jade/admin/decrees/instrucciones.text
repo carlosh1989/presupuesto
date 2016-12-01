@@ -1,0 +1,25 @@
+
+partida_id
+autocomplete    ---------
+						|
+						codigoPresupuestario
+						partida_codigo + dependencia_codigo
+                        |
+dependencia_id-----------
+autocomplete
+
+numero 
+ingresan 
+
+tipoMovimiento
+automatico insertado segun de que formulario se envie
+
+descripcion
+ingresan textarea
+
+observaciones 
+ingresan si se anula decreto
+
+estado 
+
+
