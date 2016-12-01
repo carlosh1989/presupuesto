@@ -3,7 +3,19 @@
 @section('content')
 <div class="container"><br/>
   <div class="card-panel">
-    <h5 class="blue-text"><a href="#modal1" class="waves-effect waves-blue btn-flat blue-text">Decreto N° {{$decreto->numero}}</a></h5>
+    <div class="row">
+      <div class="col s9">
+        <h5 class="blue-text"><a href="#modal1" class="waves-effect waves-blue btn-flat blue-text">Decreto N° {{$decreto->numero}}</a></h5>
+      </div>
+      <div class="col s3">
+        <div>
+          <h5 class="blue-text">
+            Monto: 
+            @var('montoTotal',(double)$decreto->montoTotal)  <a class="grey-text">{{$montoTotal}}</a>
+          </h5>
+        </div>
+      </div>
+    </div>
     <div>
       <div class="divider"></div>
       <div class="row">
@@ -56,44 +68,41 @@
         </div>
         <div class="divider"></div>
       </div>
-      <div class="row">
-        <div class="col s6"></div>
-        <div class="col s3">
-          <div><a class="blue-text">Monto sumatorio:   <a class="grey-text">{{$decreto->details->sum('monto')}}</a></a></div>
-        </div>
-        <div class="col s3">
-          <div><a class="blue-text">
-              Monto Total: 
-              @var('montoTotal',(double)$decreto->montoTotal)  <a class="grey-text">{{$montoTotal}}</a></a></div>
-        </div>
-      </div>
+      
       <div class="divider"></div>
       <div class="row">
-        <div class="col s12"></div>
-      </div>@if($decreto->details)
-      <table class="centered striped">
-        <thead>
-          <tr class="grey-text">
-            <th>Partida</th>
-            <th>Monto</th>
-            <th>Traslado</th>
-          </tr>
-        </thead>
-        <tbody>@forelse($decreto->details as $partida)
-          <tr>
-            <td>{{$partida->partida}}</td>@var('monto',(double)$partida->monto)
-            <td>{{$monto}}</td>@if($partida->traslado == true)
-            <td>
-              <label>recibe</label>
-            </td>@else
-            <td>
-              <label>otorga</label>
-            </td>@endif		
-          </tr>@empty
-          @endforelse
-        </tbody>
-      </table>@else
-      <div class="grey-text">No hay partidas aun para este decreto.</div>@endif
+        <div class="col s12">@if($decreto->details)
+          <table class="centered striped">
+            <thead>
+              <tr class="grey-text">
+                <th>Partida</th>
+                <th>Monto</th>
+                <th>Traslado</th>
+              </tr>
+            </thead>
+            <tbody>@forelse($decreto->details as $partida)
+              <tr>
+                <td>{{$partida->partida}}</td>@if($partida->traslado == true)
+                <td>
+                  <label>recibe</label>
+                </td>@else
+                <td>
+                  <label>otorga</label>
+                </td>@endif	
+                @var('monto',(double)$partida->monto)
+                <td>{{$monto}}	</td>
+              </tr>@empty
+              @endforelse
+            </tbody>
+          </table>@else
+          <div class="grey-text">No hay partidas aun para este decreto.</div>@endif
+        </div>
+        <div class="col s8"></div>
+        <div class="col s4">
+          <div class="divider"></div><br/>
+          <div><a class="blue-text">Monto Total:   <a class="grey-text">{{$decreto->details->sum('monto')}}</a></a></div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="modal1" class="modal botton-sheet">

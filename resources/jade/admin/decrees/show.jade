@@ -4,7 +4,13 @@
 .container
 	br
 	.card-panel
-		h5.blue-text: a.waves-effect.waves-blue.btn-flat.blue-text(href="#modal1") Decreto N° {{$decreto->numero}}
+		.row
+			.col.s9
+				h5.blue-text: a.waves-effect.waves-blue.btn-flat.blue-text(href="#modal1") Decreto N° {{$decreto->numero}}
+			.col.s3
+				div: h5.blue-text Monto: 
+					@var('montoTotal',(double)$decreto->montoTotal)  
+					a.grey-text {{$montoTotal}}
 		div
 			.divider
 			.row
@@ -49,47 +55,54 @@
 								button.btn.red(type="submit") 
 									i(aria-hidden="true").fa.fa-minus
 				.divider
-			.row
-				.col.s6
-				.col.s3
-					div: a.blue-text Monto sumatorio:   
-						a.grey-text {{$decreto->details->sum('monto')}}
-				.col.s3
-					div: a.blue-text Monto Total: 
-						@var('montoTotal',(double)$decreto->montoTotal)  
-						a.grey-text {{$montoTotal}}
+			//- .row
+			//- 	.col.s6
+			//- 	.col.s3
+			//- 		div: a.blue-text Monto sumatorio:   
+			//- 			a.grey-text {{$decreto->details->sum('monto')}}
+			//- 	.col.s3
+			//- 		div: a.blue-text Monto Total: 
+			//- 			@var('montoTotal',(double)$decreto->montoTotal)  
+			//- 			a.grey-text {{$montoTotal}}
 
 
 			.divider
 			.row
 				.col.s12
-			@if($decreto->details)
-			table.centered.striped
-				thead
-					tr.grey-text
-						th Partida
-						th Monto
-						th Traslado
-				tbody
-					@forelse($decreto->details as $partida)
-					tr
-						td {{$partida->partida}}
-						@var('monto',(double)$partida->monto)
-						td {{$monto}}
-						@if($partida->traslado == true)
-						td
-							label recibe
-						@else
-						td
-							label otorga
-						@endif		
-					@empty
+					@if($decreto->details)
+					table.centered.striped
+						thead
+							tr.grey-text
+								th Partida
+								th Monto
+								th Traslado
+						tbody
+							@forelse($decreto->details as $partida)
+							tr
+								td {{$partida->partida}}
+								@if($partida->traslado == true)
+								td
+									label recibe
+								@else
+								td
+									label otorga
+								@endif	
+								@var('monto',(double)$partida->monto)
+								td {{$monto}}	
+							@empty
 
-					@endforelse
+							@endforelse
 
-			@else
-			div.grey-text No hay partidas aun para este decreto.
-			@endif
+					@else
+					div.grey-text No hay partidas aun para este decreto.
+					@endif
+				.col.s8
+			
+				.col.s4
+					.divider
+					br
+					div: a.blue-text Monto Total:   
+						a.grey-text {{$decreto->details->sum('monto')}}
 
 
 	div(id="modal1").modal.botton-sheet
